@@ -8,6 +8,7 @@ import { BrandHeader } from "@/components/BrandHeader/BrandHeader";
 import { PhotoUploader } from "@/components/PhotoUploader/PhotoUploader";
 import { FormField } from "@/components/Inputs/FormField";
 import { CtaButton } from "@/components/Inputs/CtaButton";
+import { SelectField } from "@/components/Inputs/SelectField";
 import { BuilderFields, BUILDER_FIELDS_KEY, BUILDER_PHOTO_KEY } from "@/types/builder";
 
 export default function UploadPage() {
@@ -58,9 +59,43 @@ export default function UploadPage() {
         <FormField fieldKey="name" label="How should we call you" id="field-name" name="name" type="text" required />
         <FormField fieldKey="stack" label="Current Stack" id="field-stack" name="stack" type="text" required />
         <FormField fieldKey="instagram" label="Instagram" id="field-instagram" name="instagram" type="text" />
-        <FormField fieldKey="mission" label="Current Mission" id="field-mission" name="mission" type="text" />
-        <FormField fieldKey="superpower" label="Superpower" id="field-superpower" name="superpower" type="text" />
-        <FormField fieldKey="mode" label="Build Mode" id="field-mode" name="mode" type="text" />
+        <FormField fieldKey="mission" label="Current Mission" id="field-mission" name="mission" type="text" placeholder="eg. maxxing github: mining crypto"/>
+        <SelectField
+          fieldKey="superpower"
+          label="Superpower"
+          id="field-superpower"
+          name="superpower"
+          options={[
+            { value: "⚡ Ships Fast", label: "⚡ Ships Fast" },
+            { value: "🧠 Solves Hard Problems", label: "🧠 Solves Hard Problems" },
+            { value: "🤖 Automates Everything", label: "🤖 Automates Everything" },
+            { value: "🎨 Crafts Beautiful UX", label: "🎨 Crafts Beautiful UX" },
+            { value: "🛰 Thinks Big", label: "🛰 Thinks Big" },
+            { value: "🔍 Breaks Down Complexity", label: "🔍 Breaks Down Complexity" },
+            { value: "🔥 Turns Ideas into Products", label: "🔥 Turns Ideas into Products" },
+            { value: "🛠 Builds Anything", label: "🛠 Builds Anything" },
+            { value: "🌱 Learns Ridiculously Fast", label: "🌱 Learns Ridiculously Fast" },
+            { value: "🤝 Brings People Together", label: "🤝 Brings People Together" },
+          ]}
+        />
+        <SelectField
+          fieldKey="mode"
+          label="Builder Type"
+          id="field-mode"
+          name="mode"
+          options={[
+            { value: "💻 Full-Stack Builder", label: "💻 Full-Stack Builder" },
+            { value: "🤖 AI Engineer", label: "🤖 AI Engineer" },
+            { value: "🚀 Founder", label: "🚀 Founder" },
+            { value: "🎨 Product Designer", label: "🎨 Product Designer" },
+            { value: "⚙️ Robotics Builder", label: "⚙️ Robotics Builder" },
+            { value: "📱 Mobile Builder", label: "📱 Mobile Builder" },
+            { value: "🌐 Web Builder", label: "🌐 Web Builder" },
+            { value: "🔬 Researcher", label: "🔬 Researcher" },
+            { value: "☁️ Systems Builder", label: "☁️ Systems Builder" },
+            { value: "🎓 Student Builder", label: "🎓 Student Builder" },
+          ]}
+        />
 
         <CtaButton type="submit" label="enter the realm.." labelLeft={315} />
       </form>

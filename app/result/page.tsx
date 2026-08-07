@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import { Stage } from "@/components/Stage/Stage";
 import { BackgroundDecor } from "@/components/BackgroundDecor/BackgroundDecor";
 import { BrandHeader } from "@/components/BrandHeader/BrandHeader";
@@ -9,71 +8,42 @@ import { IdCard } from "@/components/Card/IdCard";
 import { PfpFrame } from "@/components/Frame/PfpFrame";
 import { CtaButton } from "@/components/Inputs/CtaButton";
 import { BuilderFields, BUILDER_FIELDS_KEY, BUILDER_PHOTO_KEY } from "@/types/builder";
-import { captureElementAsPng, downloadPng } from "@/utils/captureElement";
+import { captureElementAsPng, downloadPng } from "@/utils/canvas/captureElement";
 import styles from "./result.module.css";
 
 export default function ResultPage() {
-  const router = useRouter();
   const [fields, setFields] = useState<BuilderFields>({ name: "", stack: "" });
   const [photoDataUrl, setPhotoDataUrl] = useState<string | null>(null);
-  const [ready, setReady] = useState(false);
-  // Use a ref for the lock so flipping it doesn't re-render (and therefore
-  // doesn't change button text) while html2canvas is mid-capture.
-  const sharingRef = useRef(false);
-  const stageRef = useRef<HTMLElement | null>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const storedFields = sessionStorage.getItem(BUILDER_FIELDS_KEY);
-    const storedPhoto = sessionStorage.getItem(BUILDER_PHOTO_KEY);
-
-    // Guard: must have gone through upload first
-    if (!storedFields && !storedPhoto) {
-      router.replace("/upload");
-      return;
-    }
-
     if (storedFields) setFields(JSON.parse(storedFields));
-    if (storedPhoto) setPhotoDataUrl(storedPhoto);
-    setReady(true);
-  }, [router]);
 
-  if (!ready) return null;
+    const storedPhoto = sessionStorage.getItem(BUILDER_PHOTO_KEY);
+    if (storedPhoto) setPhotoDataUrl(storedPhoto);
+  }, []);
 
   async function handleShare() {
-    if (sharingRef.current) return;
-    sharingRef.current = true;
+    if (!stageRef.current) return;
 
-    try {
-      // 1. Capture the wrapper (viewport-accurate, exactly what you see).
-      //    Exclude the CTA button so it doesn't appear in the screenshot.
-      if (stageRef.current) {
-        const png = await captureElementAsPng(
-          stageRef.current,
-          undefined,           // uses window.devicePixelRatio automatically
-          "[data-no-capture]" // excludes the share button
-        );
-        downloadPng(png, "hh-goa-card.png");
-      }
-    } finally {
-      sharingRef.current = false;
-    }
+    // Capture the actual rendered Stage node — not a re-built copy — and
+    // exclude the CTA button itself via [data-capture-ignore], per the
+    // "wrap only what you want to export, button stays outside" fix.
+    const dataUrl = await captureElementAsPng(stageRef.current, undefined, "[data-capture-ignore]");
+    downloadPng(dataUrl, "hh-goa-2026-builder-card.png");
 
-    // 2. Open X compose — user attaches the downloaded image manually
     const text = encodeURIComponent(
-      "Just built my HH Goa 2026 Builder Card 🌴\nAttaching my card below — see you in Goa! #FrameInGoa #HackerHouseGoa"
+      "Hacker House Goa has been on my radar for a while, and I'm genuinely excited about the chance to be part of it. 🌴\nLooking forward to building, collaborating, and making some unforgettable memories with fellow builders.\nSee you in Goa! 🚀\n#FrameInGoa #HackerHouseGoa"
     );
-    window.open(
-      `https://twitter.com/intent/tweet?text=${text}`,
-      "_blank",
-      "noopener,noreferrer"
-    );
+    // TODO: swap for the hosted share-link / OG-image URL once the
+    // upload-and-host step is wired up, per the architecture doc.
+    const shareUrl = encodeURIComponent(window.location.href);
+    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${shareUrl}`, "_blank");
   }
 
   return (
-    <Stage
-      ariaLabel="Your generated Hacker House Goa 2026 builder card"
-      captureRef={stageRef}
-    >
+    <Stage ref={stageRef} ariaLabel="Your generated Hacker House Goa 2026 builder card">
       <BackgroundDecor palmOffsetVariant />
       <BrandHeader />
 
@@ -87,7 +57,7 @@ export default function ResultPage() {
         label="share on x"
         labelLeft={398}
         onClick={handleShare}
-        data-no-capture
+        data-capture-ignore=""
       />
     </Stage>
   );

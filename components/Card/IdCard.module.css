@@ -10,12 +10,47 @@
 }
 
 .backerPlate {
+  position: relative;
   width: 320px;
   height: 500px;
   background: var(--color-card-backer);
   border: 1px solid var(--color-white);
   border-radius: var(--radius-card);
-  transform: rotate(14.73deg);
+  animation: backerFlipIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  overflow: hidden;
+}
+
+/* #FrameInGoa text running bottom-to-top on the left edge of the backer */
+.backerTag {
+  position: absolute;
+  bottom: 28px;
+  left: -38px;
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.55);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes backerFlipIn {
+  from {
+    opacity: 0;
+    transform: rotate(14.73deg) scaleX(0.05) translateX(-30px);
+  }
+  60% {
+    transform: rotate(14.73deg) scaleX(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(14.73deg) scaleX(1) translateX(0);
+  }
 }
 
 .card {
@@ -29,6 +64,18 @@
   border-radius: var(--radius-card);
   box-shadow: 3px 4px 4px 0px rgba(0, 0, 0, 0.25);
   overflow: hidden;
+  animation: cardSlideUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+@keyframes cardSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .photoMask {
@@ -36,7 +83,7 @@
   left: -1px;
   top: 0;
   width: 321px;
-  height: 339px;
+  height: 220px;
   object-fit: cover;
 }
 
@@ -48,7 +95,14 @@
   width: 321px;
   height: 339px;
   overflow: hidden;
+  /* needed so the ::after pseudo-element clips correctly */
+  isolation: isolate;
+  position: absolute;
+  inset: 0;
 }
+
+
+
 
 /* User's uploaded photo, clipped to match the card-subtract diagonal cut.
    The polygon keeps the entire photo except the bottom-right triangle:
@@ -69,6 +123,31 @@
 );
 }
 
+.glassPanel{
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    height:196px;
+
+    background:rgba(230,210,60,.16);
+
+    backdrop-filter:
+        blur(18px)
+        saturate(170%);
+
+    -webkit-backdrop-filter:
+        blur(18px)
+        saturate(170%);
+
+    border-top:1px solid rgba(255,255,255,.22);
+
+    z-index:2;
+}
+
 .name {
   position: absolute;
   left: 6px;
@@ -81,6 +160,13 @@
   font-size: var(--fs-card-name);
   color: var(--color-white);
   word-break: break-word;
+}
+
+.name {
+  padding: 4px 12px;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
 }
 
 .role {
@@ -109,12 +195,12 @@
 
 .tag {
   position: absolute;
-  left: 20px;
-  width: 156.199px;
+  left: 10px;
+  width: 290px;   /* near-full card interior width */
   height: 50.98px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .tag1 {
@@ -130,9 +216,10 @@
 .tagLabel {
   font-family: var(--font-mono);
   font-style: italic;
-  font-size: var(--fs-card-tag);
+  font-size: 16px;
   color: var(--color-black);
   transform: rotate(-6.7deg);
+  transform-origin: left center;
   white-space: nowrap;
 }
 

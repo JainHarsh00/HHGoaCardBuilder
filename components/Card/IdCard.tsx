@@ -1,7 +1,7 @@
 import { BuilderFields } from "@/types/builder";
 import styles from "./IdCard.module.css";
 
-const TAGS = ["adventurer", "conqueror", "gooner"] as const;
+
 
 export function IdCard({
   fields,
@@ -14,7 +14,9 @@ export function IdCard({
     <>
       {/* Backer plate — the second card peeking out behind the front card */}
       <div className={styles.backer} aria-hidden="true">
-        <div className={styles.backerPlate} />
+        <div className={styles.backerPlate}>
+          <span className={styles.backerTag}>#FrameInGoa</span>
+        </div>
       </div>
 
       <article className={styles.card} aria-label="Your builder ID card">
@@ -29,17 +31,23 @@ export function IdCard({
             />
           )}
         </div>
+
+        <div className={styles.glassPanel} />
+        
         <h1 className={styles.name}>{fields.name || "Your Name"}</h1>
         <p className={styles.role}>{fields.stack || "Stack"}</p>
         {fields.instagram && (
           <p className={styles.username}>@{fields.instagram.replace(/^@/, "")}</p>
         )}
         <ul className={styles.tags}>
-          {TAGS.map((tag, i) => (
-            <li key={tag} className={`${styles.tag} ${styles[`tag${i + 1}`]}`}>
-              <span className={styles.tagLabel}>{tag}</span>
-            </li>
-          ))}
+          {[fields.mission, fields.superpower, fields.mode].map(
+            (tag, i) =>
+              tag ? (
+                <li key={i} className={`${styles.tag} ${styles[`tag${i + 1}`]}`}>
+                  <span className={styles.tagLabel}>{tag}</span>
+                </li>
+              ) : null
+          )}
         </ul>
       </article>
 

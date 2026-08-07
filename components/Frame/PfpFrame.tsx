@@ -1,18 +1,17 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { captureElementAsPng, downloadPng } from "@/utils/captureElement";
+import { useState } from "react";
+import { drawPfpFramePng, downloadPng } from "@/utils/canvas/captureElement";
 import styles from "./PfpFrame.module.css";
 
 export function PfpFrame({ photoDataUrl }: { photoDataUrl: string | null }) {
-  const frameRef = useRef<HTMLElement>(null);
   const [capturing, setCapturing] = useState(false);
 
   async function handleDownload() {
-    if (!frameRef.current || capturing) return;
+    if (!photoDataUrl || capturing) return;
     setCapturing(true);
     try {
-      const png = await captureElementAsPng(frameRef.current, 2);
+      const png = await drawPfpFramePng(photoDataUrl);
       downloadPng(png, "hh-goa-pfp.png");
     } finally {
       setCapturing(false);
@@ -21,7 +20,6 @@ export function PfpFrame({ photoDataUrl }: { photoDataUrl: string | null }) {
 
   return (
     <article
-      ref={frameRef as React.RefObject<HTMLElement>}
       className={`${styles.frame} ${capturing ? styles.capturing : ""}`}
       aria-label="Your circular profile picture frame — click to download"
       onClick={handleDownload}
