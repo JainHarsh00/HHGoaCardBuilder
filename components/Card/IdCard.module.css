@@ -1,0 +1,155 @@
+.backer {
+  position: absolute;
+  left: 320px;
+  top: 315px;
+  width: 436.636px;
+  height: 564.942px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backerPlate {
+  width: 320px;
+  height: 500px;
+  background: var(--color-card-backer);
+  border: 1px solid var(--color-white);
+  border-radius: var(--radius-card);
+  transform: rotate(14.73deg);
+}
+
+.card {
+  position: absolute;
+  left: 483px;
+  top: 350px;
+  width: 320px;
+  height: 500px;
+  background: var(--color-card-bg);
+  background: rgba(205, 200, 200, 0.267);
+  border-radius: var(--radius-card);
+  box-shadow: 3px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.photoMask {
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 321px;
+  height: 339px;
+  object-fit: cover;
+}
+
+/* Composite photo container — user photo clipped to diagonal shape */
+.photoContainer {
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 321px;
+  height: 339px;
+  overflow: hidden;
+}
+
+/* User's uploaded photo, clipped to match the card-subtract diagonal cut.
+   The polygon keeps the entire photo except the bottom-right triangle:
+   top-left → top-right → right-side cut point → bottom cut point → bottom-left */
+.userPhoto {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 78%,
+    78% 90%,
+    0 90%
+);
+}
+
+.name {
+  position: absolute;
+  left: 6px;
+  top: 267px;
+  width: 233px;
+  height: 35px;
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--fs-card-name);
+  color: var(--color-white);
+  word-break: break-word;
+}
+
+.role {
+  position: absolute;
+  left: 6px;
+  top: 307px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-card-role);
+  color: var(--color-black);
+  white-space: nowrap;
+}
+
+.username {
+  position: absolute;
+  left: 6px;
+  top: 339px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-card-username);
+  color: var(--color-username);
+  white-space: nowrap;
+}
+
+.tags {
+  list-style: none;
+}
+
+.tag {
+  position: absolute;
+  left: 20px;
+  width: 156.199px;
+  height: 50.98px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tag1 {
+  top: 379px;
+}
+.tag2 {
+  top: 412px;
+}
+.tag3 {
+  top: 445px;
+}
+
+.tagLabel {
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: var(--fs-card-tag);
+  color: var(--color-black);
+  transform: rotate(-6.7deg);
+  white-space: nowrap;
+}
+
+.pin {
+  position: absolute;
+  left: 627px;
+  top: 333px;
+  width: 64px;
+  height: 58px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.25));
+}
+
+.pinImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.25));
+
+}

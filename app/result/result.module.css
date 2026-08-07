@@ -1,0 +1,11 @@
+.message {
+  position: absolute;
+  left: 963px;
+  top: 755px;
+  width: 654px;
+  height: 95px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-message);
+  color: var(--color-black);
+  line-height: normal;
+}

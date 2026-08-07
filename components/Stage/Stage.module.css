@@ -1,0 +1,13 @@
+
+.wrapper {
+  width: 100%;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+.stage {
+  position: relative;
+  transform-origin: top left;
+  background: var(--color-bg);
+  flex-shrink: 0;
+}

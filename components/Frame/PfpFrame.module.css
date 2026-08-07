@@ -1,0 +1,73 @@
+/* Outer wrapper — sized to match the frame.svg dimensions (313×316) */
+.frame {
+  position: absolute;
+  left: 1095px;
+  top: 407px;
+  width: 313px;
+  height: 316px;
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.frame:hover {
+  filter: brightness(1.08) drop-shadow(0 4px 18px rgba(0,0,0,0.35));
+  transform: scale(1.03);
+}
+
+.frame:active,
+.capturing {
+  filter: brightness(0.85);
+  transform: scale(0.98);
+  cursor: wait;
+}
+
+/* User photo — fills the circle cutout in frame.svg.
+   The circle is a 300×300 circle at x=3,y=0 in the SVG (rx=150).
+   We position and clip the photo to sit exactly in that circle. */
+.photo {
+  position: absolute;
+  left: 3px;
+  top: 0;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
+}
+
+/* The combined frame SVG sits on top of the photo */
+.frameOverlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Download hint — circular overlay that appears on hover */
+.downloadHint {
+  position: absolute;
+  left: 3px;
+  top: 0;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.52);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.frame:hover .downloadHint {
+  opacity: 1;
+}

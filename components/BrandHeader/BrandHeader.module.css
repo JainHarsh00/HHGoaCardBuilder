@@ -1,0 +1,33 @@
+.timestamp {
+  position: absolute;
+  left: 103px;
+  top: 111px;
+  width: 196px;
+  height: 120px;
+}
+
+.wordmark {
+  position: absolute;
+  left: 595px;
+  top: 155px;
+  width: 730px;
+  height: 151px;
+}
+
+.goaBadge {
+  position: absolute;
+  left: 927px;
+  top: 177px;
+  width: 107.034px;
+  height: 108.107px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goaBadgeInner {
+  position: relative;
+  width: 80.547px;
+  height: 82.644px;
+  transform: rotate(-23.78deg);
+}
