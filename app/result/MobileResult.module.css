@@ -1,0 +1,225 @@
+.page {
+  min-height: 100dvh;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 20px 40px;
+  gap: 28px;
+  overflow-x: hidden;
+}
+
+/* ── Logo ── */
+.logo {
+  width: 120px;
+  height: auto;
+  display: block;
+}
+
+/* ── ID Card ── */
+.card {
+  position: relative;
+  width: 300px;
+  height: 500px;
+  background: rgba(205, 200, 200, 0.267);
+  border-radius: var(--radius-card);
+  box-shadow: 3px 4px 16px 0px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.cardPhotoContainer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cardUserPhoto {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 79% 101%, 0 100%);
+}
+
+.cardGlass {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 220px;
+  background: rgba(0, 0, 0, 0.52);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  z-index: 2;
+}
+
+.cardName {
+  position: absolute;
+  left: 14px;
+  top: 288px;
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 32px;
+  color: var(--color-white);
+  word-break: break-word;
+  z-index: 3;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.cardRole {
+  position: absolute;
+  left: 14px;
+  top: 332px;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  z-index: 3;
+}
+
+.cardUsername {
+  position: absolute;
+  left: 14px;
+  top: 355px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  /* orange accent matching the screenshot */
+  color: #f5a623;
+  white-space: nowrap;
+  z-index: 3;
+}
+
+.cardTags {
+  list-style: none;
+  z-index: 3;
+}
+
+.cardTag {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.cardTag1 { top: 384px; }
+.cardTag2 { top: 418px; }
+.cardTag3 { top: 452px; }
+
+.cardTagLabel {
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.88);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  z-index: 3;
+}
+
+/* ── PFP Frame ── */
+.pfpFrame {
+  position: relative;
+  width: 220px;
+  height: 222px;
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.pfpFrame:hover {
+  filter: brightness(1.08) drop-shadow(0 4px 18px rgba(0, 0, 0, 0.35));
+  transform: scale(1.03);
+}
+
+.pfpFramePhoto {
+  position: absolute;
+  left: 2px;
+  top: 0;
+  width: 210px;
+  height: 210px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
+}
+
+.pfpFrameOverlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.pfpDownloadHint {
+  position: absolute;
+  left: 2px;
+  top: 0;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.52);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pfpFrame:hover .pfpDownloadHint {
+  opacity: 1;
+}
+
+/* ── Message ── */
+.message {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--color-black);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ── Share button ── */
+.shareBtn {
+  width: 100%;
+  max-width: 320px;
+  height: 58px;
+  background: var(--color-overlay-dark);
+  border-radius: var(--radius-cta);
+  color: var(--color-white);
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.shareBtn:hover {
+  opacity: 0.85;
+  transform: scale(1.02);
+}
+
+.shareBtn:active {
+  transform: scale(0.98);
+}

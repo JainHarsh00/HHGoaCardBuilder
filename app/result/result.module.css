@@ -35,3 +35,10 @@
   writing-mode: vertical-rl;
   text-orientation: mixed;
 }
+
+/* Hide the scroll hint on small/portrait screens where the canvas fits */
+@media (max-width: 1024px) {
+  .scrollHint {
+    display: none;
+  }
+}

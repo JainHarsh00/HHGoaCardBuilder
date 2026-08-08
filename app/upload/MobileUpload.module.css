@@ -1,0 +1,168 @@
+.page {
+  min-height: 100dvh;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 20px 48px;
+  gap: 20px;
+  overflow-x: hidden;
+}
+
+/* ── Logo ── */
+.logo {
+  width: 120px;
+  height: auto;
+  display: block;
+}
+
+/* ── Photo upload box ── */
+.uploader {
+  width: 100%;
+  max-width: 320px;
+}
+
+.uploaderTitle {
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--color-black);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 200px;
+  border: 2px dashed rgba(0, 0, 0, 0.4);
+  border-radius: var(--radius-upload-box);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  background: rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s ease;
+}
+
+.dropzone:hover {
+  border-color: rgba(0, 0, 0, 0.7);
+}
+
+.dropzoneError {
+  border-color: #c0392b;
+}
+
+.dropzoneHint {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.dropzoneInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.dropzonePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.uploadError {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #c0392b;
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* ── Form fields ── */
+.form {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fieldLabel {
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--color-black);
+}
+
+.fieldInput,
+.fieldSelect {
+  width: 100%;
+  height: 48px;
+  background: rgba(0, 0, 0, 0.06);
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-input);
+  padding: 0 14px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--color-black);
+  outline: none;
+  transition: border-color 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.fieldInput:focus,
+.fieldSelect:focus {
+  border-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Inline pair of fields (stack + instagram) */
+.fieldRow {
+  display: flex;
+  gap: 10px;
+}
+
+.fieldRow .field {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Submit button ── */
+.submitBtn {
+  width: 100%;
+  max-width: 320px;
+  height: 58px;
+  background: var(--color-overlay-dark);
+  border-radius: var(--radius-cta);
+  color: var(--color-white);
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  margin-top: 4px;
+}
+
+.submitBtn:hover {
+  opacity: 0.85;
+  transform: scale(1.02);
+}
+
+.submitBtn:active {
+  transform: scale(0.98);
+}
