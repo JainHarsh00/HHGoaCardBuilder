@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Hacker House Goa 2026 — Builder Card",
   description:
     "Upload a photo, get an instant HH Goa 2026 builder card or PFP frame.",
+  icons: {
+    icon: "/assets/coconut.png",
+  },
 };
 
 export const viewport: Viewport = {
@@ -19,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/assets/coconut.png" type="image/png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

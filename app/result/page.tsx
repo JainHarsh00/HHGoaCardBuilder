@@ -8,7 +8,6 @@ import { IdCard } from "@/components/Card/IdCard";
 import { PfpFrame } from "@/components/Frame/PfpFrame";
 import { CtaButton } from "@/components/Inputs/CtaButton";
 import { BuilderFields, BUILDER_FIELDS_KEY, BUILDER_PHOTO_KEY } from "@/types/builder";
-import { captureElementAsPng, downloadPng } from "@/utils/canvas/captureElement";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { MobileResult } from "./MobileResult";
 import styles from "./result.module.css";
@@ -28,14 +27,8 @@ export default function ResultPage() {
   }, []);
 
   async function handleShare() {
-    if (!isMobile && stageRef.current) {
-      // Desktop: capture the canvas as PNG
-      const dataUrl = await captureElementAsPng(stageRef.current, undefined, "[data-capture-ignore]");
-      downloadPng(dataUrl, "hh-goa-2026-builder-card.png");
-    }
-
     const text = encodeURIComponent(
-      "Hacker House Goa has been on my radar for a while, and I'm genuinely excited about the chance to be part of it. 🌴\nLooking forward to building, collaborating, and making some unforgettable memories with fellow builders.\nSee you in Goa! 🚀\n#FrameInGoa #HackerHouseGoa"
+      "🤖 AI Builder reporting for Hacker House Goa.\n\nSee you in October! 🌴\n\nhttps://hhgoacardbuilder.netlify.app/\n#FrameInGoa #HackerHouseGoa"
     );
     window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
   }
@@ -51,7 +44,7 @@ export default function ResultPage() {
     );
   }
 
-  // ── Desktop layout (unchanged canvas) ─────────────────────────────────────
+  // ── Desktop layout ─────────────────────────────────────────────────────────
   return (
     <Stage ref={stageRef} ariaLabel="Your generated Hacker House Goa 2026 builder card">
       <BackgroundDecor palmOffsetVariant />
